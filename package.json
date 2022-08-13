@@ -6,7 +6,7 @@
   "author": "aleksandr-suchugov <alex.coup@yandex.ru>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
     "lint": "eslint .",
     "test": "jest --testPathPattern=./src/",
