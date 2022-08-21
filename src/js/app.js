@@ -2,7 +2,7 @@ import '../css/style.css';
 import NPSicons from './NPSicons';
 import paymentSysType from './npsCheck';
 import luhnChk from './luhn';
-import CallResponses from './serverResponse'
+import CallResponses from './serverResponse';
 
 window.addEventListener('load', () => {
   const iconManager = new NPSicons();
@@ -18,13 +18,10 @@ window.addEventListener('load', () => {
     const cardType = paymentSysType(inputField.value);
     if (cardType && luhnChk(inputField.value)) {
       response.cardTypeFound(cardType);
-    } else {
-      if (inputField.value !== '') {
-        response.cardTypeNotFound();
-      }
+    } else if (inputField.value !== '') {
+      response.cardTypeNotFound();
     }
   });
-
 
   resetBtn.addEventListener('click', (ev) => {
     ev.preventDefault();
