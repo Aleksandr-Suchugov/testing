@@ -1,18 +1,33 @@
-import iconSetter from './iconSetter';
-import paymentSysCheck from './npsCheck';
+import '../css/style.css';
+import NPSicons from './NPSicons';
+import paymentSysType from './npsCheck';
 import luhnChk from './luhn';
-import popupError from './popupError';
-import popupSuccess from './popupSuccess';
+import CallResponses from './serverResponse'
 
-iconSetter();
+window.addEventListener('load', () => {
+  const iconManager = new NPSicons();
+  iconManager.iconSetter();
 
-const cardForm = document.querySelector('validate-form');
-const inputField = cardForm.querySelector('validate-form__input');
-cardForm.addEventListener('change', () => paymentSysCheck(inputField.innerText));
+  const response = new CallResponses();
+  const cardForm = document.querySelector('.validate-form');
+  const resetBtn = document.querySelector('.reset-button');
+  const inputField = document.getElementById('validate-form__input');
 
-cardForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  if (luhnChk(inputField.innerText)) {
-    popupSuccess(paymentSysCheck(inputField.innerText));
-  } else popupError();
+  cardForm.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const cardType = paymentSysType(inputField.value);
+    if (cardType && luhnChk(inputField.value)) {
+      response.cardTypeFound(cardType);
+    } else {
+      if (inputField.value !== '') {
+        response.cardTypeNotFound();
+      }
+    }
+  });
+
+
+  resetBtn.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    response.inputClear();
+  });
 });

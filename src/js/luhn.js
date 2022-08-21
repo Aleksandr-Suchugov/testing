@@ -1,10 +1,19 @@
-export default function luhnChk(num) {
-  const arr = (`${num}`)
-    .split('')
-    .reverse()
-    .map((x) => parseInt(x, 10));
-  const lastDigit = arr.splice(0, 1)[0];
-  let sum = arr.reduce((acc, val, i) => (i % 2 !== 0 ? acc + val : acc + (((val * 2) % 9) || 9)), 0);
-  sum += lastDigit;
-  return sum % 10 === 0;
-};
+export default function luhnChk(value) {
+  value = value.toString().replace(/\D/g, '');
+
+  let nCheck = 0;
+  let bEven = false;
+
+  for (let n = value.length - 1; n >= 0; n -= 1) {
+    let nDigit = parseInt(value.charAt(n), 10);
+
+    if (bEven && (nDigit *= 2) > 9) {
+      nDigit -= 9;
+    }
+
+    nCheck += nDigit;
+    bEven = !bEven;
+  }
+
+  return (nCheck % 10) === 0;
+}
