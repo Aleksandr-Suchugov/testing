@@ -35,5 +35,6 @@ export default function paymentSysType(value) {
     if ((value[0] === '6') && ((value[1] !== '7') || (value[1] !== '0'))) {
       return 'unionPay';
     }
-  } else return popup();
+  }
+  return popup();
 }
