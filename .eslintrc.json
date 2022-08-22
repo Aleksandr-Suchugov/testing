@@ -17,6 +17,6 @@
             "error", 
             {"code": 200}
         ],
-        "treatUndefinedAsUnspecified": true
+        "treatUndefinedAsUnspecified": 1
     }
 }
