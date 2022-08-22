@@ -27,6 +27,7 @@ export default class NPSicons {
 
   iconSetter() {
     const container = document.querySelector('.container');
+    /* eslint-disable-next-line */
     for (const [type, img] of Object.entries(this.paymentSystemList)) {
       const cardBox = document.createElement('div');
       cardBox.classList.add('cards__icon');
